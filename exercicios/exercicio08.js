@@ -8,22 +8,23 @@ jogo. (Número do pior jogo). */
 let stringPontuacoes = "30, 40, 20, 4, 51, 25, 42, 38, 56, 110"
 
 const recorde = function(stringPontuacoes) {
-    let pontuacao = stringPontuacoes.split(', ')
-    let maiorEMenor = []
-    maiorEMenor[0] = 0
-    maiorEMenor[1] = pontuacao[0]
-    maiorEMenor[2] = pontuacao[0]
+    let pontuacao = stringPontuacoes.split(', ').map(Number)
+    let qntdRecorde = 0
+    let maiorRecorde = pontuacao[0]
+    let menorPontuacao = pontuacao[0]
+    let indice = 0
     
-    for(let i = 1; i < pontuacao.length; i++) {
-        if(pontuacao[i] > maiorEMenor[1]) {
-            maiorEMenor[0]++
-            maiorEMenor[1] = pontuacao[i]
-        } else if(pontuacao[i] < maiorEMenor[2]) {
-            maiorEMenor[2] = pontuacao[i]
+    for(let i = 0; i < pontuacao.length; i++) {
+        if(pontuacao[i] > maiorRecorde) {
+            qntdRecorde++
+            maiorRecorde = pontuacao[i]
+        } else if(pontuacao[i] < menorPontuacao) {
+            menorPontuacao = pontuacao[i]
+            indice = pontuacao.indexOf(menorPontuacao)
         }
     }
 
-    return maiorEMenor
+    return [qntdRecorde, maiorRecorde, menorPontuacao, indice]
 }
 
 console.log(recorde(stringPontuacoes))
